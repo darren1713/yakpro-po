@@ -100,30 +100,31 @@ class Config
     public $extract_comment_from_line       = null;         // when both 2 are set, each obfuscated file will contain an extract of the corresponding source file,
     public $extract_comment_to_line         = null;         // starting from extract_comment_from_line number, and endng at extract_comment_to_line line number.
 
-    public $obfusucate_header_line1  = "/*   __________________________________________________";  // Header line 1 in obfusucated file
-    public $obfusucate_header_line2  = "    |  Obfuscated by YAK Pro - Php Obfuscator  %-6.6s  |"; // Header line 2 in obfusucated file
-    public $obfusucate_header_line3  = "    |              on %s              |";                  // Header line 3 in obfusucated file
-    public $obfusucate_header_line4  = "    |    GitHub: https://github.com/pk-fr/yakpro-po    |"; // Header line 4 in obfusucated file
-    public $obfusucate_header_line5  = "    |__________________________________________________|"; // Header line 5 in obfusucated file
-    public $obfusucate_header_line6  = "*/";                                                       // Header line 6 in obfusucated file
+    public $obfusucate_header_line1  = "/*   __________________________________________________".PHP_EOL;  // Header line 1 in obfusucated file
+    public $obfusucate_header_line2  = "    |  Obfuscated by YAK Pro - Php Obfuscator  %-6.6s  |".PHP_EOL; // Header line 2 in obfusucated file
+    public $obfusucate_header_line3  = "    |              on %s              |".PHP_EOL;                  // Header line 3 in obfusucated file
+    public $obfusucate_header_line4  = "    |    GitHub: https://github.com/pk-fr/yakpro-po    |".PHP_EOL; // Header line 4 in obfusucated file
+    public $obfusucate_header_line5  = "    |__________________________________________________|".PHP_EOL; // Header line 5 in obfusucated file
+    public $obfusucate_header_line6  = "*/".PHP_EOL;                                                       // Header line 6 in obfusucated file
     public $obfusucate_header_match  = "    |  Obfuscated by YAK Pro - Php Obfuscator "; // MUST match a portion of one of the headers above, to prevent reprocessing a file
 
     private $comment                        = '';
 
     function __construct()
     {
-        $this->comment .= $this->obfusucate_header_line1.PHP_EOL;
-        $this->comment .= $this->obfusucate_header_line2.PHP_EOL;
-        $this->comment .= $this->obfusucate_header_line3.PHP_EOL;
-        $this->comment .= $this->obfusucate_header_line4.PHP_EOL;
-        $this->comment .= $this->obfusucate_header_line5.PHP_EOL;
-        $this->comment .= $this->obfusucate_header_line6.PHP_EOL;
     }
 
     public function get_comment()
     {
         global $yakpro_po_version;
         $now = strftime("%F %T");
+
+	$this->comment = $this->obfusucate_header_line1;
+        $this->comment .= $this->obfusucate_header_line2;
+        $this->comment .= $this->obfusucate_header_line3;
+        $this->comment .= $this->obfusucate_header_line4;
+        $this->comment .= $this->obfusucate_header_line5;
+        $this->comment .= $this->obfusucate_header_line6;
 
         return sprintf($this->comment,$yakpro_po_version,$now);
     }
